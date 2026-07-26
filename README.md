@@ -208,6 +208,45 @@ Main tables (from `pakar_diabetes.sql`):
 
 ---
 
+## Deploy ke Vercel + Aiven MySQL
+
+### 1. Siapkan database di Aiven
+1. Buka https://console.aiven.io/
+2. Buat project baru dan service MySQL.
+3. Catat detail koneksi: host, port, username, password, dan nama database.
+4. Aktifkan akses dari luar dengan menambahkan IP `0.0.0.0/0` pada allowlist.
+
+### 2. Impor database
+1. Buka Aiven Console atau tool MySQL client.
+2. Import file `pakar_diabetes.sql`.
+
+### 3. Set environment variables di Vercel
+Di Vercel Project > Settings > Environment Variables, tambahkan:
+- `DB_HOST`
+- `DB_PORT`
+- `DB_USER`
+- `DB_PASS`
+- `DB_NAME`
+
+Contoh:
+- `DB_HOST` = host MySQL Aiven Anda
+- `DB_PORT` = port MySQL Aiven Anda
+- `DB_USER` = username MySQL Anda
+- `DB_PASS` = password MySQL Anda
+- `DB_NAME` = nama database Anda
+
+### 4. Deploy ke Vercel
+1. Push project ke GitHub.
+2. Buka https://vercel.com dan import repository.
+3. Pilih folder proyek.
+4. Deploy.
+
+### 5. Catatan penting
+- Karena aplikasi ini adalah PHP, Vercel bukan pilihan terbaik untuk semua fitur PHP. Jika deployment gagal, gunakan hosting yang mendukung PHP penuh seperti cPanel, Hostinger, InfinityFree, atau Railway dengan PHP.
+- Jika Aiven menolak koneksi, periksa host, port, username, password, dan allowlist IP.
+
+---
+
 ## License & credits
 
 - UI templates may include third-party themes (e.g. BootstrapMade **Butterfly**, **NiceAdmin**). Respect their licenses when redistributing.

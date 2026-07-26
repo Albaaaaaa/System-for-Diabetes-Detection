@@ -6,22 +6,8 @@ include "koneksi.php";
 
 //menerima nilai dari kiriman form pendaftaran
 
-
-$db_host = "localhost";
-$db_user = "root";
-$db_pass = "";
-$db_name = "pakar_diabetes";
-
-$koneksi = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
-
-if(mysqli_connect_errno()){
-  echo 'Gagal melakukan koneksi ke Database : '.mysqli_connect_error();
-}  
-
-
-
-$id_user=$_POST["id_user"];
-$nama=$_POST["nama"];
+$id_user = $_POST["id_user"] ?? '';
+$nama = $_POST["nama"] ?? '';
 
 $username=$_POST["username"];
 
