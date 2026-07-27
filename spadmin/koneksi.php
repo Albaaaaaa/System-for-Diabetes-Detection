@@ -1,22 +1,16 @@
 <?php
-require_once __DIR__ . '/env.php';
-$db_host = getenv('DB_HOST') ?: 'localhost';
-$db_user = getenv('DB_USER') ?: 'root';
-$db_pass = getenv('DB_PASS') ?: '';
-$db_name = getenv('DB_NAME') ?: 'pakar_diabetes';
-$db_port = getenv('DB_PORT') ?: '3306';
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+$db_host = 'localhost';          // atau 'sqlXXX.infinityfree.com'
+$db_user = 'YOUR_DB_USER';       // isi dengan username database Anda
+$db_pass = 'YOUR_DB_PASSWORD';   // isi dengan password database Anda
+$db_name = 'YOUR_DB_NAME';       // isi dengan nama database Anda
+$db_port = 3306;
 
 $koneksi = mysqli_init();
-$ssl_ca = getenv('DB_SSL_CA');
 
-if (!empty($ssl_ca)) {
-    mysqli_ssl_set($koneksi, NULL, NULL, $ssl_ca, NULL, NULL);
-    $ssl_flag = MYSQLI_CLIENT_SSL;
-} else {
-    $ssl_flag = 0;
-}
-
-if (!mysqli_real_connect($koneksi, $db_host, $db_user, $db_pass, $db_name, (int)$db_port, NULL, $ssl_flag)) {
+if (!mysqli_real_connect($koneksi, $db_host, $db_user, $db_pass, $db_name, $db_port)) {
     die('Gagal melakukan koneksi ke Database : ' . mysqli_connect_error());
 }
 

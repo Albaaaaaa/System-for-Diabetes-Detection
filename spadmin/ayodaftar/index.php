@@ -46,10 +46,9 @@
 						</div>
 
 						<div class="form-wrapper">
-							<label for="">Nama  </label>
+                            <label for="nama">Nama</label>
 
-							<input type="nama" name="nama" class="form-control" id="nama" placeholder="Masukan Nama " autocomplete="off" />
-
+                            <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukan Nama" autocomplete="off" />
 							
 						</div>
 
@@ -57,9 +56,9 @@
 					
 					<div class="form-row last">
 						<div class="form-wrapper">
-								<label for=""> username *</label>
-							
-							<input type="username" name="username" class="form-control" id="username" placeholder="Masukan Nama " autocomplete="off" />
+<label for="username">Username *</label>
+                            
+                            <input type="text" name="username" class="form-control" id="username" placeholder="Masukan Username" autocomplete="off" />
 							<i class="zmdi zmdi-chevron-down"></i>
 						</div>
 
@@ -68,20 +67,18 @@
 						
 					<div class="form-wrapper">
 
-							<label for=""> password *</label>
-							
-							<input type="password" name="password" class="form-control" id="password" placeholder="Masukan password " autocomplete="off" />
-
-							
+                            <label for="password">Password *</label>
+                            
+                            <input type="password" name="password" class="form-control" id="password" placeholder="Masukan password" autocomplete="off" />
 						</div>
 					</div>
 
 
 					<div class="form-row last">
 						<div class="form-wrapper">
-							<label for=""> alamat *</label>
-							
-							<input type="alamat" name="alamat" class="form-control" id="alamat" placeholder="Masukan alamat " autocomplete="off" />
+<label for="alamat">Alamat *</label>
+                            
+                            <input type="text" name="alamat" class="form-control" id="alamat" placeholder="Masukan alamat" autocomplete="off" />
 						</div>
 
 
@@ -118,7 +115,7 @@
 
 					<br>
 
-					<div style=’text-align:right;’>
+<div style="text-align:right;">
 
 				
 					<a href="../index.php" class="">Sudah Punya akun Login disini   </a>

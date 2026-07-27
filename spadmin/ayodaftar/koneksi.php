@@ -1,28 +1,18 @@
- 
-
-
-
 <?php
-require_once __DIR__ . '/env.php';
-$host = getenv('DB_HOST') ?: 'localhost';
-$user = getenv('DB_USER') ?: 'root';
-$password = getenv('DB_PASS') ?: '';
-$db = getenv('DB_NAME') ?: 'pakar_diabetes';
-$port = getenv('DB_PORT') ?: '3306';
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-$kon = mysqli_init();
-$ssl_ca = getenv('DB_SSL_CA');
+$db_host = 'localhost';          // atau 'sqlXXX.infinityfree.com'
+$db_user = 'YOUR_DB_USER';       // isi dengan username database Anda
+$db_pass = 'YOUR_DB_PASSWORD';   // isi dengan password database Anda
+$db_name = 'YOUR_DB_NAME';       // isi dengan nama database Anda
+$db_port = 3306;
 
-if (!empty($ssl_ca)) {
-    mysqli_ssl_set($kon, NULL, NULL, $ssl_ca, NULL, NULL);
-    $ssl_flag = MYSQLI_CLIENT_SSL;
-} else {
-    $ssl_flag = 0;
+$koneksi = mysqli_init();
+
+if (!mysqli_real_connect($koneksi, $db_host, $db_user, $db_pass, $db_name, $db_port)) {
+    die('Gagal melakukan koneksi ke Database : ' . mysqli_connect_error());
 }
 
-if (!mysqli_real_connect($kon, $host, $user, $password, $db, (int)$port, NULL, $ssl_flag)) {
-    die('Koneksi gagal: ' . mysqli_connect_error());
-}
-
-mysqli_set_charset($kon, 'utf8mb4');
+mysqli_set_charset($koneksi, 'utf8mb4');
 ?>

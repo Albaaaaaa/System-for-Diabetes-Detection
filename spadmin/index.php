@@ -40,10 +40,6 @@
 
 <body>
 
-
-  <form onSubmit="validasi()" action="proseslogin.php" id="login" name="login" method="post"  >
-
-
   <main>
     <div class="container">
 
@@ -78,20 +74,20 @@
                     <p class="text-center small"></p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form class="row g-3 needs-validation" novalidate action="proseslogin.php" method="post" onsubmit="return validasi()">
 
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
+                      <label for="username" class="form-label">Username</label>
                       <div class="input-group has-validation">
                         
-                        <input type="text" id="username" name="username"class="form-control" id="yourUsername" required>
+                        <input type="text" id="username" name="username" class="form-control" required>
                         <div class="invalid-feedback">Please enter your username.</div>
                       </div>
                     </div>
 
                     <div class="col-12">
-                      <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password"  type="password" id="password" name="password" class="form-control" id="yourPassword" required>
+                      <label for="password" class="form-label">Password</label>
+                      <input type="password" id="password" name="password" class="form-control" required>
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
 
@@ -101,7 +97,7 @@
                       </div>
                     </div>
                     <div class="col-12">
-                      <button  onclick="validasi()" class="btn btn-primary w-100"  type="submit">Login</button>
+                      <button class="btn btn-primary w-100" type="submit">Login</button>
 
                   
 
@@ -140,12 +136,11 @@
         var username = document.getElementById("username").value;
         var password = document.getElementById("password").value;
         
-        if (username != "" && password!="") {
-            return false;
-            
-        }else{
+        if (username !== "" && password !== "") {
+            return true;
+        } else {
             alert('Anda harus mengisi data dengan lengkap !');
-
+            return false;
         }
     }
 </script>

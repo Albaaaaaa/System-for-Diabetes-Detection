@@ -1,73 +1,65 @@
-<?php
+﻿<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+ob_start();
 include ("conn.php");
 date_default_timezone_set('Asia/Jakarta');
-
-session_start();
-
-$username = $_POST['username'];
-
-$password = $_POST['password'];
-
-
-
-//$username = mysqli_real_escape_string($username);
-//$password = mysqli_real_escape_string($password);
-
-if (empty($username) && empty($password)) {
-    header('location:index.php?error=Username dan Password Kosong!');
-} else if (empty($username)) {
-    header('location:index.php?error=Username Kosong!');
-} else if (empty($password)) {
-    header('location:index.php?error=Password Kosong!');
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 
-$q = mysqli_query($koneksi, "select * from admin where username='$username' and password='$password'");
-$row = mysqli_fetch_array ($q);
+$username = mysqli_real_escape_string($koneksi, trim($_POST['username'] ?? ''));
+$password = mysqli_real_escape_string($koneksi, trim($_POST['password'] ?? ''));
+
+if ($username === '' && $password === '') {
+    header('location:index.php?error=Username dan Password Kosong!');
+    exit;
+} else if ($username === '') {
+    header('location:index.php?error=Username Kosong!');
+    exit;
+} else if ($password === '') {
+    header('location:index.php?error=Password Kosong!');
+    exit;
+}
+
+$q = mysqli_query($koneksi, "SELECT * FROM admin WHERE username='$username' AND password='$password'");
+if (!$q) {
+    die('Query error: ' . mysqli_error($koneksi));
+}
+
+$row = mysqli_fetch_array($q);
 
 if (mysqli_num_rows($q) == 1) {
-    $_SESSION['id_user']        = $row['id_user'];
-    $_SESSION['username']   = $username;
-    $_SESSION['nama']       = $row['nama'];
+    $_SESSION['id_user'] = $row['id_user'];
+    $_SESSION['username'] = $username;
+    $_SESSION['nama'] = $row['nama'];
     $_SESSION['alamat'] = $row['alamat'];
-     
-    $_SESSION['level']      = $row['level'];
-    
-    $_SESSION['gambar']     = $row['gambar'];
-    
+    $_SESSION['level'] = $row['level'];
+    $_SESSION['gambar'] = $row['gambar'];
 
-
-    // cek jika user login sebagai admin
-    if($row['level']=="Admin"){
-
-        // buat session login dan username
+    if ($row['level'] == "Admin") {
         $_SESSION['username'] = $username;
         $_SESSION['level'] = "Admin";
-        // alihkan ke halaman dashboard admin
         header("location:admin/index.php");
-
-    // cek jika user login sebagai pegawai
-    }else if($row['level']=="User"){
-        // buat session login dan username
+        exit;
+    } else if ($row['level'] == "User") {
         $_SESSION['username'] = $username;
         $_SESSION['level'] = "User";
-        // alihkan ke halaman dashboard pegawai
         header("location:User/index.php");
-
-    // cek jika user login sebagai pengurus
-    }else if($row['level']=="Dokter"){
-        // buat session login dan username
+        exit;
+    } else if ($row['level'] == "Dokter") {
         $_SESSION['username'] = $username;
         $_SESSION['level'] = "Dokter";
-        // alihkan ke halaman dashboard pengurus
         header("location:Dokter/index.php");
-
-   
+        exit;
     }
 
-
-
+    header('location:index.php?error=Level pengguna tidak dikenali.');
+    exit;
 } else {
     header('location:index.php?error=Anda Belum Terdaftar!');
+    exit;
 }
-
 ?>

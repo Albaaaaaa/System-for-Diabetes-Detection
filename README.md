@@ -208,42 +208,20 @@ Main tables (from `pakar_diabetes.sql`):
 
 ---
 
-## Deploy ke Vercel + Aiven MySQL
+## Deploy ke InfinityFree
 
-### 1. Siapkan database di Aiven
-1. Buka https://console.aiven.io/
-2. Buat project baru dan service MySQL.
-3. Catat detail koneksi: host, port, username, password, dan nama database.
-4. Aktifkan akses dari luar dengan menambahkan IP `0.0.0.0/0` pada allowlist.
+Aplikasi ini sudah dikonfigurasi untuk deployment di **InfinityFree** dengan credentials yang sudah diatur di file koneksi.
 
-### 2. Impor database
-1. Buka Aiven Console atau tool MySQL client.
-2. Import file `pakar_diabetes.sql`.
+**Live URL:** https://alba-portofolio.site.je/
 
-### 3. Set environment variables di Vercel
-Di Vercel Project > Settings > Environment Variables, tambahkan:
-- `DB_HOST`
-- `DB_PORT`
-- `DB_USER`
-- `DB_PASS`
-- `DB_NAME`
+### Konfigurasi Database
+Database credentials sudah dikonfigurasi langsung dalam file:
+- `spadmin/koneksi.php`
+- `spadmin/conn.php`
+- `spadmin/User/koneksi.php`
+- `spadmin/ayodaftar/koneksi.php`
 
-Contoh:
-- `DB_HOST` = host MySQL Aiven Anda
-- `DB_PORT` = port MySQL Aiven Anda
-- `DB_USER` = username MySQL Anda
-- `DB_PASS` = password MySQL Anda
-- `DB_NAME` = nama database Anda
-
-### 4. Deploy ke Vercel
-1. Push project ke GitHub.
-2. Buka https://vercel.com dan import repository.
-3. Pilih folder proyek.
-4. Deploy.
-
-### 5. Catatan penting
-- Karena aplikasi ini adalah PHP, Vercel bukan pilihan terbaik untuk semua fitur PHP. Jika deployment gagal, gunakan hosting yang mendukung PHP penuh seperti cPanel, Hostinger, InfinityFree, atau Railway dengan PHP.
-- Jika Aiven menolak koneksi, periksa host, port, username, password, dan allowlist IP.
+Tidak perlu menggunakan `.env` atau environment variables. Semua pengaturan sudah tersiap untuk InfinityFree MySQL.
 
 ---
 
